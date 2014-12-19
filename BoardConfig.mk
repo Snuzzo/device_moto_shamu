@@ -126,3 +126,9 @@ USE_CLANG_PLATFORM_BUILD := true
 DONT_DEXPREOPT_PREBUILTS := true
 
 -include vendor/moto/shamu/BoardConfigVendor.mk
+
+# Inline kernel building
+TARGET_GCC_VERSION_ARM := 6.x
+TARGET_KERNEL_CONFIG := B14CKB1RD_defconfig
+TARGET_KERNEL_SOURCE := kernel/moto/shamu
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
