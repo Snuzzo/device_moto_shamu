@@ -363,8 +363,8 @@
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
-    <!-- Default color for notification LED. -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
+    <!-- Default color for notification LED. GREEN -->
+    <color name="config_defaultNotificationColor">#ff0000ff</color>
 
     <!-- Default LED on time for notification LED in milliseconds. -->
     <integer name="config_defaultNotificationLedOn">500</integer>
