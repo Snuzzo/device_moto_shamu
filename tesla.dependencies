@@ -1,0 +1,14 @@
+[
+  {
+    "remote":     "github",  
+    "repository": "TheMuppets/proprietary_vendor_motorola",
+    "target_path": "vendor/motorola",
+    "branch": "cm-13.0"
+  },
+  {
+    "remote":      "github",  
+    "repository": "Tesla-M-Deices/android_kernel_moto_shamu",
+    "target_path": "kernel/moto/shamu",
+    "branch": "mm"
+  }
+]
