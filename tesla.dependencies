@@ -7,7 +7,7 @@
   },
   {
     "remote":      "github",  
-    "repository": "Tesla-M-Deices/android_kernel_moto_shamu",
+    "repository": "Tesla-M-Devices/android_kernel_moto_shamu",
     "target_path": "kernel/moto/shamu",
     "branch": "mm"
   }

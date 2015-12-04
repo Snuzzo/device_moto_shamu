@@ -32,8 +32,8 @@ export USE_SYSTEM_CCACHE := 1
 export USE_ORACLE_JAVA := 1
 
 # Inline kernel building
-TARGET_GCC_VERSION_EXP := 5.2
-TARGET_GCC_VERSION_ARM := 5.2
+TARGET_GCC_VERSION_EXP := 5.2-uber
+TARGET_GCC_VERSION_ARM := 5.2-uber
 TARGET_KERNEL_CONFIG := hells_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
