@@ -32,8 +32,13 @@ export USE_SYSTEM_CCACHE := 1
 export USE_ORACLE_JAVA := 1
 
 # Inline kernel building
+# Kernel Toolchain
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.2/bin
+KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
+# Rom Toolchain
 TARGET_GCC_VERSION_EXP := 5.2
-TARGET_GCC_VERSION_ARM := 5.2
+
+# Kernel Defconfig
 TARGET_KERNEL_CONFIG := hells_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
