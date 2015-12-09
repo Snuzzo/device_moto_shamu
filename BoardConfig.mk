@@ -24,6 +24,9 @@ STRICT_ALIASING := false
 KRAIT_TUNINGS := true
 GRAPHITE_OPTS := false
 ENABLE_GCCONLY := true
+
+ENABLE_CPUSETS := true
+
 TARGET_NO_BOOTLOADER := true
 
 export USE_HOST_LEX := yes
