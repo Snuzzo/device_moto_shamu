@@ -307,5 +307,4 @@ struct power_module HAL_MODULE_INFO_SYM = {
     .setInteractive = power_set_interactive,
     .powerHint = power_hint,
     .setFeature = set_feature,
-    .getFeature = get_feature
 };
