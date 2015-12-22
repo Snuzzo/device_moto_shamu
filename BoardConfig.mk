@@ -22,29 +22,25 @@ TARGET_CPU_VARIANT := krait
 CLANG_O3 := true
 STRICT_ALIASING := false
 KRAIT_TUNINGS := true
-GRAPHITE_OPTS := false
+GRAPHITE_OPTS := true
 ENABLE_GCCONLY := true
 
 ENABLE_CPUSETS := true
 
 TARGET_NO_BOOTLOADER := true
 
-export USE_HOST_LEX := yes
-export USE_CCACHE := 1
-export USE_SYSTEM_CCACHE := 1
-export USE_ORACLE_JAVA := 1
+# Build
+# export USE_ORACLE_JAVA := 1
 
 # Inline kernel building
-# Kernel Toolchain
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.2/bin
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.2-uber/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
-# Rom Toolchain
-TARGET_GCC_VERSION_EXP := 5.2
-
-# Kernel Defconfig
-TARGET_KERNEL_CONFIG := hells_defconfig
+TARGET_KERNEL_CONFIG := shamu_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+
+# Rom Toolchain
+TARGET_GCC_VERSION_EXP := 5.2-uber
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE :=  2048
@@ -159,11 +155,6 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.shamu
 EXTENDED_FONT_FOOTPRINT := true
 
 # CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen   \
-    device/moto/shamu/cmhw
-
-USE_CLANG_PLATFORM_BUILD := false
+BOARD_HARDWARE_CLASS := device/moto/shamu/cmhw
 
 -include vendor/motorola/shamu/BoardConfigVendor.mk

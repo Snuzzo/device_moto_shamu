@@ -284,7 +284,7 @@ static void power_hint( __attribute__((unused)) struct power_module *module,
              process_low_power_hint(data);
              break;
         default:
-             break;
+            break;
     }
 }
 
@@ -307,4 +307,5 @@ struct power_module HAL_MODULE_INFO_SYM = {
     .setInteractive = power_set_interactive,
     .powerHint = power_hint,
     .setFeature = set_feature,
+    .getFeature = get_feature
 };
