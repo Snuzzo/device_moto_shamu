@@ -33,14 +33,14 @@ TARGET_NO_BOOTLOADER := true
 # export USE_ORACLE_JAVA := 1
 
 # Inline kernel building
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.2-uber/bin
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.3/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 TARGET_KERNEL_CONFIG := shamu_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 
 # Rom Toolchain
-TARGET_GCC_VERSION_EXP := 5.2-uber
+TARGET_GCC_VERSION_EXP := 5.3
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE :=  2048
