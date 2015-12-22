@@ -3,12 +3,12 @@
     "remote":     "github",  
     "repository": "TheMuppets/proprietary_vendor_motorola",
     "target_path": "vendor/motorola",
-    "branch": "6.0"
+    "branch": "13.0"
   },
   {
     "remote":      "github",  
     "repository": "Validus-Kernel/android_kernel_moto_shamu",
     "target_path": "kernel/moto/shamu",
-    "branch": "mm"
+    "branch": "6.0"
   }
 ]
