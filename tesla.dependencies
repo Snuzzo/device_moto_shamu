@@ -9,6 +9,6 @@
     "remote":      "github",  
     "repository": "Validus-Kernel/android_kernel_moto_shamu",
     "target_path": "kernel/moto/shamu",
-    "branch": "6.0"
+    "branch": "mm6.0"
   }
 ]
