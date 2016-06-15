@@ -1,5 +1,3 @@
-
-restorecon_recursive /sys/devices/system/cpu/cpufreq
 on charger
     #low power governing
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
@@ -43,6 +41,9 @@ on boot
     chown system system /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 
+    # disable bcl
+    write /sys/devices/qcom,bcl.39/mode disabled
+
 on property:dev.bootcomplete=1
     write /sys/module/lpm_levels/enable_low_power/l2 4
     write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
@@ -66,19 +67,85 @@ on property:dev.bootcomplete=1
     write /sys/module/msm_pm/modes/cpu2/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/retention/idle_enabled 1
     write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
-
+# ------------------------------------------------------------------------------------------------------------
+# Removed, Drunk kernel config is below
+#    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
+#    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
+#    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
+#    write /sys/module/msm_thermal/core_control/enabled 1
+#    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
+#
     # cpufreq settings
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1497600
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
+    write /sys/devices/system/cpu/cpufreq/barry-allen/above_hispeed_delay "20000 1400000:40000 1700000:20000"
+    write /sys/devices/system/cpu/cpufreq/barry-allen/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpufreq/barry-allen/hispeed_freq 1497600
+    write /sys/devices/system/cpu/cpufreq/barry-allen/target_loads "85 1500000:90 1800000:70"
+    write /sys/devices/system/cpu/cpufreq/barry-allen/min_sample_time 40000
+    write /sys/devices/system/cpu/cpufreq/barry-allen/sampling_down_factor 100000
     write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
     write /dev/cpuctl/apps/cpu.notify_on_migrate 0
+
+    # Configure Drunk kernel ---- Start
+
+    # - Enable Simple GPU algorithm
+    write /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate "1"
+    write /sys/module/simple_gpu_algorithm/parameters/simple_laziness "0"
+    write /sys/module/simple_gpu_algorithm/parameters/simple_ramp_threshold "0"
+
+    # - Setup CPU governor
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "barry-allen"
+    write /sys/devices/system/cpu/cpu1/online "1"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "barry-allen"
+    write /sys/devices/system/cpu/cpu2/online "1"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "barry-allen"
+    write /sys/devices/system/cpu/cpu3/online "1"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "barry-allen"
+    restorecon_recursive /sys/devices/system/cpu/cpufreq
+
+    # - Configure IntelliPlug
+    stop mpdecision
+    write /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq "223000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq "2457600"
+    write /sys/devices/system/cpu/cpu1/online "1"
+    write /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_min_freq "223000"
+    write /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_max_freq "2457600"
+    write /sys/devices/system/cpu/cpu2/online "1"
+    write /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_min_freq "223000"
+    write /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_max_freq "2457600"
+    write /sys/devices/system/cpu/cpu3/online "1"
+    write /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_min_freq "223000"
+    write /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_max_freq "2457600"
+    write /sys/module/intelli_plug/parameters/intelli_plug_active "1"
+    write /sys/module/intelli_plug/parameters/touch_boost_active "0"
+    write /sys/module/intelli_plug/parameters/nr_run_profile_sel "2"
+    write /sys/module/intelli_plug/parameters/nr_run_hysteresis "4"
+    write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold "3500"
+
+    # - Configure IntelliThermal
+    stop thermal-engine
+    write /sys/module/msm_thermal/parameters/enabled "1"
+    write /sys/module/msm_thermal/parameters/core_control_mask "12"
+    write /sys/module/msm_thermal/parameters/freq_control_mask "15"
+    write /sys/module/msm_thermal/parameters/limit_temp_degC "70"
+    write /sys/module/msm_thermal/parameters/core_limit_temp_degC "75"
+
+    # - Set Vibrator strength
+    write /sys/vibrator/pwmvalue 70
+
+    # - Set 6500K color calibration
+    write /sys/devices/platform/kcal_ctrl.0/kcal "250 250 255"
+    write /sys/devices/platform/kcal_ctrl.0/kcal_sat "243"
+    write /sys/devices/platform/kcal_ctrl.0/kcal_cont "255"
+    write /sys/devices/platform/kcal_ctrl.0/kcal_hue "1515"
+    write /sys/devices/platform/kcal_ctrl.0/kcal_val "250"
+    write /sys/devices/platform/kcal_ctrl.0/kcal_ctrl "1"
+
+    # Switch to sioplus scheduler and increase readahead buffer to 1024Kb
+    write /sys/block/mmcblk0/queue/scheduler sioplus
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
+
+    # Activate swap
+    exec - root system -- /system/xbin/swapon.sh
+
+    # Configure Drunk kernel ---- End
