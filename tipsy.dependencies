@@ -1,14 +1,14 @@
 [
   {
     "remote":     "github",  
-    "repository": "TheMuppets/proprietary_vendor_motorola",
-    "target_path": "vendor/motorola",
-    "branch": "cm-13.0"
+    "repository": "UBERMALLOW/vendor_moto_shamu",
+    "target_path": "vendor/moto",
+    "branch": "master"
   },
   {
     "remote":      "github",  
     "repository": "GZR-Kernels/Shamu_Drunk_Kernel",
     "target_path": "kernel/moto/shamu",
-    "branch": "tesla"
+    "branch": "6.0"
   }
 ]

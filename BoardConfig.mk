@@ -24,7 +24,7 @@ TARGET_NO_BOOTLOADER := true
 
 #Opts
 CLANG_O3 := true
-STRICT_ALIASING := true
+STRICT_ALIASING := false
 KRAIT_TUNINGS := true
 GRAPHITE_OPTS := true
 ENABLE_GCCONLY := true
@@ -35,10 +35,10 @@ TARGET_KERNEL_SOURCE := kernel/moto/shamu
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 
 # Kernel Toolchain
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.x/bin
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-5.x-uber/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 # Rom Toolchain
-TARGET_GCC_VERSION_EXP := 5.x
+TARGET_GCC_VERSION_EXP := 5.x-uber
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE :=  2048
@@ -158,4 +158,4 @@ EXTENDED_FONT_FOOTPRINT := true
 # CMHW
 BOARD_HARDWARE_CLASS := device/moto/shamu/cmhw
 
--include vendor/motorola/shamu/BoardConfigVendor.mk
+-include vendor/moto/shamu/BoardConfigVendor.mk
