@@ -103,25 +103,6 @@ on property:dev.bootcomplete=1
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "barry-allen"
     restorecon_recursive /sys/devices/system/cpu/cpufreq
 
-    # - Configure IntelliPlug
-    stop mpdecision
-    write /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq "223000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq "2457600"
-    write /sys/devices/system/cpu/cpu1/online "1"
-    write /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_min_freq "223000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_max_freq "2457600"
-    write /sys/devices/system/cpu/cpu2/online "1"
-    write /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_min_freq "223000"
-    write /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_max_freq "2457600"
-    write /sys/devices/system/cpu/cpu3/online "1"
-    write /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_min_freq "223000"
-    write /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_max_freq "2457600"
-    write /sys/module/intelli_plug/parameters/intelli_plug_active "1"
-    write /sys/module/intelli_plug/parameters/touch_boost_active "0"
-    write /sys/module/intelli_plug/parameters/nr_run_profile_sel "2"
-    write /sys/module/intelli_plug/parameters/nr_run_hysteresis "4"
-    write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold "3500"
-
     # - Configure IntelliThermal
     stop thermal-engine
     write /sys/module/msm_thermal/parameters/enabled "1"
