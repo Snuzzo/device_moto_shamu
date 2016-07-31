@@ -3,12 +3,12 @@
     "remote":     "github",  
     "repository": "TheMuppets/proprietary_vendor_motorola",
     "target_path": "vendor/motorola",
-    "revision": "cm-13.0"
+    "branch": "cm-13.0"
   },
   {
     "remote":      "github",  
     "repository": "AOSiP-Devices/platform_Shamu_Drunk_Owl_Kernel",
     "target_path": "kernel/moto/shamu",
-    "revision": "mm6.0"
+    "branch": "mm6.0"
   }
 ]
