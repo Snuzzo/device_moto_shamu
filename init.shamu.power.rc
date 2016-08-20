@@ -82,8 +82,9 @@ on property:dev.bootcomplete=1
     write /sys/devices/system/cpu/cpufreq/barry-allen/sampling_down_factor 100000
     write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
-    write /sys/module/state_notifier/parameters/enabled 1
     write /dev/cpuctl/apps/cpu.notify_on_migrate 0
+    write /sys/module/state_notifier/parameters/enabled 1
+    write /sys/kernel/state_helper/enabled 1
 
     # Configure Drunk kernel ---- Start
 
