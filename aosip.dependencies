@@ -1,0 +1,22 @@
+[
+ {
+  "remote":      "github",
+  "repository":  "B14CKB1RD-Kernel/B14CKB1RD_Kernel_N6",
+  "target_path": "kernel/moto/shamu",
+  "branch":      "n7.0"
+ },
+
+ {
+  "remote":      "bb",
+  "repository":  "hyper-toolchains/arm-eabi-6.x",
+  "target_path": "prebuilts/gcc/linux-x86/arm/arm-eabi-6.x",
+  "branch":      "SMxU"
+ },
+
+ {
+  "remote":      "github",
+  "repository":  "AOSiP-Devices/platform_vendor_moto",
+  "target_path": "vendor/moto",
+  "branch":      "n"
+ }
+] 

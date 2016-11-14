@@ -46,6 +46,20 @@ on boot
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 
 on property:dev.bootcomplete=1
+    stop mpdecision
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor nightmare
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor nightmare
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor nightmare
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor nightmare
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2649600
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2649600
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2649600
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2649600
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
+    write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/module/lpm_levels/enable_low_power/l2 4
     write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
@@ -67,22 +81,18 @@ on property:dev.bootcomplete=1
     write /sys/module/msm_pm/modes/cpu1/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu2/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/retention/idle_enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
+    write /sys/module/bcmdhd/parameters/wlrx_divide 8
+    write /sys/module/bcmdhd/parameters/wlctrl_divide 8
+    write /sys/module/xhci_hcd/parameters/wl_divide 0
+    write /sys/module/smb135x_charger/parameters/use_wlock 0
 
     # cpufreq settings
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1497600
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
-    write /sys/module/cpu_boost/parameters/input_boost_ms 500
-    write /sys/module/cpu_boost/parameters/hotplug_boost 1
-    write /sys/module/cpu_boost/parameters/wakeup_boost 1
     write /dev/cpuctl/apps/cpu.notify_on_migrate 0
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1036800
+
+    # Disable UKSM by default
+    write /sys/kernel/mm/uksm/run 0
+
+    # Default I/O values
+    write /sys/block/mmcblk0/queue/scheduler maple
+    write /sys/block/mmcblk0/queue/read_ahead_kb 512
