@@ -20,6 +20,11 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
 
+# Optimizations
+STRICT_ALIASING := true
+POLLY_OPTS := true
+GRAPHITE_OPTS := true
+
 ENABLE_CPUSETS := true
 
 TARGET_NO_BOOTLOADER := true
