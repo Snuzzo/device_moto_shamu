@@ -424,3 +424,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 # ro.product.first_api_level indicates the first api level the device has commercially launched on.
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=21
+
+# These modules won't sanitize correctly with newer clang.
+$(call add-product-sanitizer-module-config,fec,never)
+$(call add-product-sanitizer-module-config,libfec_host,never)
+$(call add-product-sanitizer-module-config,libfec_rs_host,never)
